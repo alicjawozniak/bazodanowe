@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -21,7 +20,6 @@ public class Position {
     @NotEmpty
     private String name;
 
-    @Size(min = 0)
     private long salary;
 
 }

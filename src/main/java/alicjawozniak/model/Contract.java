@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -22,7 +21,6 @@ public class Contract {
     @NotNull
     private LocalDate signDate;
 
-    @Size(min = 0)
     private long value;
 
 }

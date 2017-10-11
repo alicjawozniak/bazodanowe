@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -22,7 +21,6 @@ public class CompanyCar {
     @NotEmpty
     private String registrationNo;
 
-    @Size(min = 0)
     private long mileage;
 
     @OneToOne
