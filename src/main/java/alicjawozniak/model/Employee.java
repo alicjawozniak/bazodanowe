@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -29,9 +28,6 @@ public class Employee {
 
     @NotEmpty
     private String lastName;
-
-    @NotNull
-    private LocalDate birthDate;
 
     @NotEmpty
     @Email

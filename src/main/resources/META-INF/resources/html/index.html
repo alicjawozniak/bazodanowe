@@ -1,0 +1,237 @@
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+</head>
+<body ng-app="empRegApp">
+<div ng-controller="home" class="container">
+    <h1>Employee Registry</h1>
+    <div style="text-align:right;">
+        <button ng-click="createEmployee()" class="btn btn-success"> New Employee</button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+
+
+        <div ng-show="view == 'single'">
+
+            <button ng-click="showList()" class="btn btn-warning">Back to List</button>
+            <form>
+                <h2 class="bg-info">Basic Info</h2>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td style="width: 500px;">First Name</td>
+                        <td><input class="form-control" ng-model="employee.firstName"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Last Name</td>
+                        <td><input class="form-control" ng-model="employee.lastName"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Phone No</td>
+                        <td><input class="form-control" ng-model="employee.phoneNo"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Email</td>
+                        <td><input class="form-control" ng-model="employee.email"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Pesel</td>
+                        <td><input class="form-control" ng-model="employee.pesel"/></td>
+                    </tr>
+                </table>
+
+                <h2 class="bg-info">Address</h2>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td style="width: 500px;">Street</td>
+                        <td><input class="form-control" ng-model="employee.address.street"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Street number</td>
+                        <td><input class="form-control" ng-model="employee.address.streetNumber"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">City</td>
+                        <td><input class="form-control" ng-model="employee.address.city"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Zipcode</td>
+                        <td><input class="form-control" ng-model="employee.address.zipCode"/></td>
+                    </tr>
+                </table>
+
+                <h2 class="bg-info">Bank account</h2>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td style="width: 500px;">Iban Number</td>
+                        <td><input class="form-control" ng-model="employee.bankAccount.iban"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Active</td>
+                        <td>
+                            <label class="checkbox-inline" style="margin-top: -10px;">
+                                <input type="checkbox" class="form-control" ng-model="employee.bankAccount.active"/>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+
+                <h2 class="bg-info">Company Branch</h2>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td style="width: 500px;">Name</td>
+                        <td><input class="form-control" ng-model="employee.companyBranch.name"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">City</td>
+                        <td><input class="form-control" ng-model="employee.companyBranch.city"/></td>
+                    </tr>
+                </table>
+
+                <h2 class="bg-info">Company car</h2>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td style="width: 500px;">Registration number</td>
+                        <td><input class="form-control" ng-model="employee.companyCar.registrationNo"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Mileage</td>
+                        <td><input class="form-control" ng-model="employee.companyCar.mileage"/></td>
+                    </tr>
+                </table>
+
+                <h2 class="bg-info">Position</h2>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td style="width: 500px;">Name</td>
+                        <td><input class="form-control" ng-model="employee.position.name"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 500px;">Salary</td>
+                        <td><input class="form-control" ng-model="employee.position.salary"/></td>
+                    </tr>
+                </table>
+
+                <h2 class="bg-info">Clients - {{employee.clients.length}}</h2>
+                <table class="table table-striped table-hover">
+                    <tr ng-repeat="client in employee.clients">
+                        <td>{{client.name}}</td>
+                        <td>{{client.phoneNo}}</td>
+                        <td>{{client.email}}</td>
+                        <td>
+                            <div ng-repeat="contract in client.contracts"> {{contract.signDate.dayOfMonth + '.' +
+                                contract.signDate.monthValue + '.' +
+                                contract.signDate.year+' : '+contract.value+';'}}
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <button ng-click="saveEmployee()" class="btn btn-primary"> Save</button>
+
+
+            </form>
+        </div>
+
+
+        <div ng-show="view == 'list'">
+            <form class="form-inline">
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Id</label>
+                    <input type="text" ng-model="employeeFilter.id" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>First name</label>
+                    <input type="text" ng-model="employeeFilter.firstName" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Last name</label>
+                    <input type="text" ng-model="employeeFilter.lastName" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Email</label>
+                    <input type="text" ng-model="employeeFilter.email" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Phone No</label>
+                    <input type="text" ng-model="employeeFilter.phoneNo" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Pesel</label>
+                    <input type="text" ng-model="employeeFilter.pesel" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Address city</label>
+                    <input type="text" ng-model="employeeFilter.addressCity" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Position id</label>
+                    <input type="text" ng-model="employeeFilter.positionId" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Company Car Registration No</label>
+                    <input type="text" ng-model="employeeFilter.companyCarRegistrationNo" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Bank Account Id</label>
+                    <input type="text" ng-model="employeeFilter.bankAccountIban" class="form-control"/>
+                </div>
+                <div style="display: inline-block; padding: 10px;">
+                    <label>Company Branch Name</label>
+                    <input type="text" ng-model="employeeFilter.companyBranchName" class="form-control"/>
+                </div>
+
+                <button ng-click="showList()" class="btn btn-primary" style="width: 65%;"> Search</button>
+
+
+            </form>
+            <br/>
+            <br/>
+            <table class="table table-striped table-hover">
+                <tr class="info">
+                    <th ng-click="searchSorted('id')">Id <a ng-show="sort=='id'">&#9650;</a></th>
+                    <th ng-click="searchSorted('firstName')">First Name <a ng-show="sort=='firstName'">&#9650;</a></th>
+                    <th ng-click="searchSorted('lastName')">Last Name <a ng-show="sort=='lastName'">&#9650;</a></th>
+                    <th ng-click="searchSorted('pesel')">Pesel <a ng-show="sort=='pesel'">&#9650;</a></th>
+                    <th ng-click="searchSorted('phoneNo')">Phone No <a ng-show="sort=='phoneNo'">&#9650;</a></th>
+                    <th ng-click="searchSorted('email')">Email <a ng-show="sort=='email'">&#9650;</a></th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Branch</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="employee in allEmployees track by $index">
+                    <td style="vertical-align: middle">{{employee.id}}</td>
+                    <td style="vertical-align: middle">{{employee.firstName}}</td>
+                    <td style="vertical-align: middle">{{employee.lastName}}</td>
+                    <td style="vertical-align: middle">{{employee.pesel}}</td>
+                    <td style="vertical-align: middle">{{employee.phoneNo}}</td>
+                    <td style="vertical-align: middle">{{employee.email}}</td>
+                    <td style="vertical-align: middle">{{employee.address.street}}</td>
+                    <td style="vertical-align: middle">{{employee.address.city}}</td>
+                    <td style="vertical-align: middle">{{employee.companyBranch.name}}</td>
+                    <td style="vertical-align: middle">
+                        <button ng-click="showSingle(employee.id)" class="btn btn-info">Details</button>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="text-align: center">
+                <div class="col-md-6">
+                    <button ng-click="getPrevPage()" class="btn btn-primary" ng-show="!page.first"> <</button>
+                </div>
+                <div class="col-md-6">
+                    <button ng-click="getNextPage()" class="btn btn-primary" ng-show="!page.last"> ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -5,14 +5,11 @@ import alicjawozniak.model.Employee;
 import alicjawozniak.model.QEmployee;
 import alicjawozniak.repository.EmployeeRepository;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
 
 @Service
 @RequiredArgsConstructor
@@ -22,40 +19,40 @@ public class EmployeeService {
 
     public Page<Employee> readEmployees(Pageable pageable, EmployeeFilter employeeFilter) {
         BooleanBuilder builder = new BooleanBuilder();
-        if (employeeFilter.getId() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getId())) {
             builder.and(QEmployee.employee.id.eq(employeeFilter.getId()));
         }
-        if (employeeFilter.getFirstName() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getFirstName())) {
             builder.and(QEmployee.employee.firstName.eq(employeeFilter.getFirstName()));
         }
-        if (employeeFilter.getLastName() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getLastName())) {
             builder.and(QEmployee.employee.lastName.eq(employeeFilter.getLastName()));
         }
-        if (employeeFilter.getEmail() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getEmail())) {
             builder.and(QEmployee.employee.email.eq(employeeFilter.getEmail()));
         }
-        if (employeeFilter.getPhoneNo() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getPhoneNo())) {
             builder.and(QEmployee.employee.phoneNo.eq(employeeFilter.getPhoneNo()));
         }
-        if (employeeFilter.getPesel() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getPesel())) {
             builder.and(QEmployee.employee.pesel.contains(employeeFilter.getPesel()));
         }
-        if (employeeFilter.getAddressCity() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getAddressCity())) {
             builder.and(QEmployee.employee.address.city.eq(employeeFilter.getAddressCity()));
         }
-        if (employeeFilter.getPositionId() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getPositionId())) {
             builder.and(QEmployee.employee.position.id.eq(employeeFilter.getPositionId()));
         }
-        if (employeeFilter.getCompanyCarRegistrationNo() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getCompanyCarRegistrationNo())) {
             builder.and(QEmployee.employee.companyCar.registrationNo.contains(employeeFilter.getCompanyCarRegistrationNo()));
         }
-        if (employeeFilter.getClient() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getClient())) {
             builder.and(QEmployee.employee.clients.contains(employeeFilter.getClient()));
         }
-        if (employeeFilter.getBankAccountIban() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getBankAccountIban())) {
             builder.and(QEmployee.employee.bankAccount.iban.contains(employeeFilter.getBankAccountIban()));
         }
-        if (employeeFilter.getCompanyBranchName() != null) {
+        if (!StringUtils.isEmpty(employeeFilter.getCompanyBranchName())) {
             builder.and(QEmployee.employee.companyBranch.name.contains(employeeFilter.getCompanyBranchName()));
         }
 

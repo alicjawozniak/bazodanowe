@@ -1,6 +1,7 @@
 package alicjawozniak.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,6 +25,7 @@ public class CompanyCar {
     private long mileage;
 
     @OneToOne
+    @JsonIgnore
     private Employee employee;
 
 }

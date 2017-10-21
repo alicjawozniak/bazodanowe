@@ -71,7 +71,6 @@ public class Bootstrap {
 
         employee1.setFirstName("Jan" + i);
         employee1.setLastName("Nowak" + i);
-        employee1.setBirthDate(LocalDate.now().minusYears(25));
         employee1.setEmail("emp" + i + "@test.com");
         employee1.setPhoneNo("111783347" + i);
         employee1.setPesel("11663784936" + i);
