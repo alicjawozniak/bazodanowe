@@ -1,5 +1,6 @@
 package alicjawozniak.service;
 
+import alicjawozniak.dto.EmployeeDto;
 import alicjawozniak.dto.EmployeeFilter;
 import alicjawozniak.model.Employee;
 import alicjawozniak.model.QEmployee;
@@ -57,5 +58,32 @@ public class EmployeeService {
         }
 
         return employeeRepository.findAll(builder.getValue(), pageable);
+    }
+
+    public Employee createEmployee(EmployeeDto dto) {
+        Employee employee = null;
+
+        if (dto.getId() != null) {
+            employee = employeeRepository.findOne(dto.getId());
+        }
+
+        if (employee == null) {
+            employee = new Employee();
+        }
+
+        employee.setId(dto.getId());
+        employee.setFirstName(dto.getFirstName());
+        employee.setLastName(dto.getLastName());
+        employee.setEmail(dto.getEmail());
+        employee.setPhoneNo(dto.getPhoneNo());
+        employee.setPesel(dto.getPesel());
+        employee.setAddress(dto.getAddress());
+        employee.setPosition(dto.getPosition());
+        employee.setCompanyCar(dto.getCompanyCar());
+        employee.setClients(dto.getClients());
+        employee.setBankAccount(dto.getBankAccount());
+        employee.setCompanyBranch(dto.getCompanyBranch());
+
+        return employeeRepository.save(employee);
     }
 }

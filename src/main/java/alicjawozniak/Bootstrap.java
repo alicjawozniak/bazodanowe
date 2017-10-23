@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.stream.IntStream;
 
 @Service
 public class Bootstrap {
@@ -41,21 +41,33 @@ public class Bootstrap {
 
         createAdmins();
 
+        generateEmployees(50);
 
-        Employee employee1 = createEmployee(1);
-        Client client1 = createClient(1);
-        createEmployee(2);
-        createClient(2);
-        createEmployee(3);
-        createClient(3);
-        Employee employee0 = createEmployee(0);
-        Client client0 = createClient(0);
-        employee0.setClients(Arrays.asList(client0, client1));
-        employeeRepository.save(employee0);
+//        Employee employee1 = createEmployee(1);
+//        Client client1 = createClient(1);
+//        createEmployee(2);
+//        createClient(2);
+//        createEmployee(3);
+//        createClient(3);
+//        Employee employee0 = createEmployee(0);
+//        Client client0 = createClient(0);
+//        employee0.setClients(Arrays.asList(client0, client1));
+//        employeeRepository.save(employee0);
+//
+//        client0.setEmployees(Arrays.asList(employee0, employee1));
+//        clientRepository.save(client0);
 
-        client0.setEmployees(Arrays.asList(employee0, employee1));
-        clientRepository.save(client0);
+    }
 
+    private void generateEmployees(int i) {
+        IntStream.range(0, i).forEach(value -> {
+            Employee employee = createEmployee(value);
+            Client client = createClient(value);
+            employee.getClients().add(client);
+            employee = employeeRepository.save(employee);
+            client.getEmployees().add(employee);
+            clientRepository.save(client);
+        });
     }
 
     private void createAdmins() {
@@ -80,34 +92,27 @@ public class Bootstrap {
         address.setStreet("Marszałkowska" + i);
         address.setStreetNumber("1" + i);
         address.setZipCode("11-111" + i);
-        address = addressRepository.save(address);
         employee1.setAddress(address);
 
         Position position = new Position();
         position.setName("Robak" + i);
         position.setSalary(1000);
-        position = positionRepository.save(position);
         employee1.setPosition(position);
 
         CompanyCar companyCar = new CompanyCar();
         companyCar.setRegistrationNo("1cdfjin" + i);
         companyCar.setMileage(10l + i);
-        companyCar = companyCarRepository.save(companyCar);
         employee1.setCompanyCar(companyCar);
-
-        employee1.setClients(Collections.emptyList());
 
         BankAccount bankAccount = new BankAccount();
         bankAccount.setIban("13464736782" + i);
         bankAccount.setActive(true);
-        bankAccount = bankAccountRepository.save(bankAccount);
         employee1.setBankAccount(bankAccount);
 
 
         CompanyBranch companyBranch = new CompanyBranch();
         companyBranch.setName("Oddzial 1" + i);
         companyBranch.setCity("Warszawa");
-        companyBranch = companyBranchRepository.save(companyBranch);
         employee1.setCompanyBranch(companyBranch);
 
         employee1 = employeeRepository.save(employee1);
@@ -138,7 +143,6 @@ public class Bootstrap {
 
 
         client.setContracts(Arrays.asList(contract, contract2));
-        client.setEmployees(Collections.emptyList());
         return clientRepository.save(client);
     }
 }

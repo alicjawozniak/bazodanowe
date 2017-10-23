@@ -69,7 +69,7 @@ angular.module('empRegApp', [])
             $scope.view = 'list';
             $scope.params = {};
 
-            $scope.size = 2;
+            $scope.size = 10;
 
             $scope.page = {};
 

@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,8 +30,8 @@ public class Client {
     //employees taking careof a client
     @ManyToMany
     @JsonIgnore
-    private List<Employee> employees;
+    private List<Employee> employees = new ArrayList<>();
 
     @OneToMany
-    private List<Contract> contracts;
+    private List<Contract> contracts = new ArrayList<>();
 }

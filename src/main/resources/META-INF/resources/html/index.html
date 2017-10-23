@@ -222,10 +222,13 @@
             </table>
 
             <div style="text-align: center">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <button ng-click="getPrevPage()" class="btn btn-primary" ng-show="!page.first"> <</button>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <span>{{pageNumber + 1}}/{{page.totalPages}}</span>
+                </div>
+                <div class="col-md-4">
                     <button ng-click="getNextPage()" class="btn btn-primary" ng-show="!page.last"> ></button>
                 </div>
             </div>

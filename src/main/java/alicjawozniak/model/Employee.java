@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -41,22 +42,22 @@ public class Employee {
     private String pesel;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Position position;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private CompanyCar companyCar;
 
-    @ManyToMany
-    private List<Client> clients;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Client> clients = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private BankAccount bankAccount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private CompanyBranch companyBranch;
 
 }
