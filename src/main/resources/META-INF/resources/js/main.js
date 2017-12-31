@@ -19,19 +19,37 @@ angular.module('empRegApp', [])
 
 
         $scope.saveEmployee = function () {
-            $http({
-                method: 'POST',
-                url: '/api/employee',
-                data: JSON.stringify($scope.employee)
-            })
-                .then(function (response) {
-                    console.log(response);
 
-                }, function (error) {
-                    console.log(error);
-                });
+            if ($scope.employee.firstName == null
+                || $scope.employee.firstName == ''
+                ||$scope.employee.lastName == null
+                || $scope.employee.lastName == ''
+                || $scope.employee.email == null
+                || $scope.employee.email == '')
+            {
+                var x = document.getElementsByClassName("custom-required");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.backgroundColor = "orangered";
+                }
+                alert("Wypełnij wymagane wartości");
+                window.scrollTo(0,0);
+            }
+            else {
+                $http({
+                    method: 'POST',
+                    url: '/api/employee',
+                    data: JSON.stringify($scope.employee)
+                })
+                    .then(function (response) {
+                        console.log(response);
 
-            $scope.showList();
+                    }, function (error) {
+                        console.log(error);
+                    });
+
+                $scope.showList();
+            }
 
         };
 

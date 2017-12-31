@@ -25,20 +25,20 @@
                 <h2 class="bg-info">Basic Info</h2>
                 <table class="table table-striped table-hover">
                     <tr>
-                        <td style="width: 500px;">First Name</td>
-                        <td><input class="form-control" ng-model="employee.firstName"/></td>
+                        <td style="width: 500px;">First Name *</td>
+                        <td><input class="form-control custom-required" ng-model="employee.firstName" required/></td>
                     </tr>
                     <tr>
-                        <td style="width: 500px;">Last Name</td>
-                        <td><input class="form-control" ng-model="employee.lastName"/></td>
+                        <td style="width: 500px;">Last Name *</td>
+                        <td><input class="form-control custom-required" ng-model="employee.lastName" required/></td>
                     </tr>
                     <tr>
                         <td style="width: 500px;">Phone No</td>
                         <td><input class="form-control" ng-model="employee.phoneNo"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 500px;">Email</td>
-                        <td><input class="form-control" ng-model="employee.email"/></td>
+                        <td style="width: 500px;">Email *</td>
+                        <td><input class="form-control custom-required" ng-model="employee.email" required/></td>
                     </tr>
                     <tr>
                         <td style="width: 500px;">Pesel</td>
