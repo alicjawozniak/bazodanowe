@@ -30,10 +30,16 @@ angular.module('empRegApp', [])
                 var x = document.getElementsByClassName("custom-required");
                 var i;
                 for (i = 0; i < x.length; i++) {
-                    x[i].style.backgroundColor = "orangered";
+
+                    if (x[i].value == null
+                    || x[i].value == ''
+                    || x[i].value === ''){
+                        x[i].style.backgroundColor = "orangered";
+
+                    }
                 }
-                alert("Wypełnij wymagane wartości");
                 window.scrollTo(0,0);
+                alert("Please fill required fields");
             }
             else {
                 $http({
@@ -48,6 +54,11 @@ angular.module('empRegApp', [])
                         console.log(error);
                     });
 
+                var x = document.getElementsByClassName("custom-required");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.backgroundColor = "white";
+                }
                 $scope.showList();
             }
 
